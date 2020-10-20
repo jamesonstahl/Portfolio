@@ -18,6 +18,7 @@ protected:
     bool status;
 };
 
+//Returns the account status
 bool Account::ShowStatus(){
     return status;
 }
@@ -37,6 +38,7 @@ protected:
     int numberChecks;
 };
 
+//Checking constructor assigns a random account number and sets default values for the other variables
 Checking::Checking(){
     srand(static_cast<unsigned int>(time(nullptr)));
     numberChecks = 10;
@@ -44,16 +46,19 @@ Checking::Checking(){
     status = false;
 }
 
+//Closes account by setting status to false and balance to 0
 void Checking::CloseAccount(){
     status = false;
     balance = 0;
 }
 
+//Opens account with the balance being the parameter
 void Checking::OpenAccount(double x){
     status = true;
     balance = x;
 }
 
+//Prints out the users checking account information
 void Checking::ShowInfo(){
     cout << "Account number: " << number << endl;
     cout << "Balance: $" << balance << endl;
@@ -67,10 +72,12 @@ void Checking::ShowInfo(){
     cout << "Number of checks: " << numberChecks << endl;
 }
 
+//Deposits amount passed in to the checking account balance
 void Checking::Deposit(double x){
     balance += x;
 }
 
+//Withdraws amount passed in from the checking account balance if the balace is not negative
 void Checking::Withdraw(double x){
     if((balance - x) >= 0){
         balance -= x;
@@ -80,10 +87,12 @@ void Checking::Withdraw(double x){
     }
 }
 
+//Increases number of check by the passed in value
 void Checking::Order(int x){
     numberChecks += x;
 }
 
+//Writes a check by subtracting the amount from the balance and decreases number of checks
 void Checking::Write(double x){
     if((balance - x) >= 0){
         balance -= x;
@@ -94,6 +103,7 @@ void Checking::Write(double x){
     }
 }
 
+//Returns the status of the checking account
 bool Checking::ShowStatus(){
     return status;
 }
@@ -110,23 +120,28 @@ protected:
     double matureBalance;
 };
 
+//Savings constructor assigns a random account number and sets default values for the other variables
 Savings::Savings(){
     srand(static_cast<unsigned int>(time(nullptr)));
     number = (rand() % 5000) + 5001;
     status = false;
 }
 
+//Closes account by setting status to false and balance to 0
+
 void Savings::CloseAccount(){
     status = false;
     balance = 0;
 }
 
+//Opens account with the balance being the parameter
 void Savings::OpenAccount(double x){
     status = true;
     balance = x;
     matureBalance = balance + (balance * interestRate);
 }
 
+//Prints out the users checking account information
 void Savings::ShowInfo(){
     cout << "Account number: " << number << endl;
     cout << "Balance: $" << balance << endl;
@@ -140,6 +155,7 @@ void Savings::ShowInfo(){
     cout << "Mature Balance: " << matureBalance << endl;
 }
 
+//Returns the status of the checking account
 bool Savings::ShowStatus(){
     return status;
 }
@@ -171,16 +187,18 @@ private:
     Checking checkings;
     Savings savings;
 };
-
+//Default constructor is empty
 Customer::Customer(){
     
 }
 
+//Contructor assigns name and pin
 Customer::Customer(string a, string b){
     name = a;
     pin = b;
 }
 
+//Calls ShowStatus function from the savings class to determine if the account is open or closed
 void Customer::CheckSavings(){
     if(savings.ShowStatus() == true){
         cout << "Savings account is open" << endl;
@@ -190,6 +208,7 @@ void Customer::CheckSavings(){
     }
 }
 
+//Calls ShowStatus function from the checking class to determine if the account is open or closed
 void Customer::CheckChecking(){
     if(checkings.ShowStatus() == true){
             cout << "Checking account is open" << endl;
@@ -199,6 +218,7 @@ void Customer::CheckChecking(){
         }
 }
 
+//Prints out users info and the info of their accounts if they are open
 void Customer::Show(){
     cout << "Name: " << name << endl;
     cout << "Pin: " << pin << endl;
@@ -212,58 +232,72 @@ void Customer::Show(){
     }
 }
 
+//Returns customer name
 string Customer::GetName(){
     return name;
 }
 
+//Returns customer pin number
 string Customer::GetPin(){
     return pin;
 }
 
+//Closes the customers checking account by calling CloseAccount function from the checking class
 void Customer::CloseChecking(){
     checkings.CloseAccount();
 }
 
+//Opens the customers checking account by calling OpenAccount function from the checking class
 void Customer::OpenChecking(double x){
     checkings.OpenAccount(x);
 }
 
+//Calls the ShowInfo function from the checking class to print out the customers checking account info
 void Customer::ShowCheckingInfo(){
     checkings.ShowInfo();
 }
 
+//Calls the Deposit function from the checking class to deposit an amount specified by the customer
 void Customer::Deposit(double x){
     checkings.Deposit(x);
 }
 
+//Calls the Withdraw function from the checking class to withdraw an amount specified by the customer
 void Customer::Withdraw(double x){
     checkings.Withdraw(x);
 }
 
+//Calls the Order function from the checking class to order an amount of checks specified by the customer
 void Customer::Order(int x){
     checkings.Order(x);
 }
 
+//Calls the Write function from the checking class to write a check with the amount specified by the customer
 void Customer::Write(double x){
     checkings.Write(x);
 }
 
+//Closes the customers savings account by calling CloseAccount function from the savings class
 void Customer::CloseSavings(){
     savings.CloseAccount();
 }
 
+//Opens the customers savings account by calling OpenAccount function from the savings class
 void Customer::OpenSavings(double x){
     savings.OpenAccount(x);
 }
 
+//Calls the ShowInfo function from the savings class to print out the customers savings account info
 void Customer::ShowSavingsInfo(){
     savings.ShowInfo();
 }
 
+//Returns the status of a customers checking account by calling the ShowStatus function from the checking class
 bool Customer::ShowCheckingStatus(){
     return checkings.ShowStatus();
 }
 
+//Returns the status of a customers savings account by calling the ShowStatus function from the savings class
 bool Customer::ShowSavingsStatus(){
     return savings.ShowStatus();
 }
@@ -275,6 +309,7 @@ int main(int argc, const char * argv[]) {
     string input1;
     string input2;
     
+    //Creates bank menu that can be traversed by the user
     while(choice1 != "3"){
         bool choice2 = false;
         bool choice3 = false;
@@ -288,6 +323,7 @@ int main(int argc, const char * argv[]) {
         cout << "Press 3 to quit" << endl;
         cin >> choice1;
         while(choice2 == false){
+            //User inputs name and pin to determine if they have an existing account
             if(choice1 == "1"){
                 string name;
                 string pin;
@@ -325,6 +361,7 @@ int main(int argc, const char * argv[]) {
                     }
                 }
             }
+            //User inputs name and pin to create a new account
             else if(choice1 == "2"){
                 string name;
                 string pin;
@@ -349,6 +386,7 @@ int main(int argc, const char * argv[]) {
             return 0;
             }
         }
+        //Creates customer bank interface that is determined by what accounts the customer has open
         while(choice3 == false){
             cout << "Customer menu for " << activeCustomer.GetName() << ":" << endl;
             if(activeCustomer.ShowCheckingStatus() == false){
@@ -410,6 +448,7 @@ int main(int argc, const char * argv[]) {
                 cout << "Savings account closed" << endl;
             }
             else if(input1 == "vc"){
+                //Checking account menu
                 while(choice4 == false){
                     cout << "Checking menu for " << activeCustomer.GetName() << ":" << endl;
                     cout << left << setfill('-')<< setw(30);
@@ -470,6 +509,7 @@ int main(int argc, const char * argv[]) {
                 }
             }
             else if(input1 == "vs"){
+                //Savings account menu
                 while(choice5 == false){
                     cout << "Savings menu for " << activeCustomer.GetName() << ":" << endl;
                     cout << left << setfill('-')<< setw(30);
@@ -506,3 +546,4 @@ int main(int argc, const char * argv[]) {
         }
     }
 }
+
