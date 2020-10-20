@@ -23,6 +23,7 @@ Person::Person(){
     
 }
 
+//Constructor assigns user inputted parameters to variables
 Person::Person(string a, int b, string c, vector<string> d, int e){
     name = a;
     age = b;
@@ -32,6 +33,7 @@ Person::Person(string a, int b, string c, vector<string> d, int e){
     
 }
 
+//Calculated risk for COVID-19 by adding to a risk counter depending on state, age, and conditions
 void Person::CalculateRisk(){
     vector<string> highRisk{"NY", "NJ", "MA", "IL", "CA", "PA", "MI", "FL", "TX", "CT"};
     for(int i = 0; i < highRisk.size(); i++){
@@ -65,6 +67,7 @@ void Person::CalculateRisk(){
     }
 }
 
+//Prints out user info
 void Person::ShowInfo(){
     cout << name << endl;
     cout << age << endl;
@@ -77,6 +80,9 @@ void Person::ShowInfo(){
     }
 }
 
+//User inputs personal information and takes a series of health assessment questions
+//Increases risk counter if the user has COVID symptoms or pre existing conditions
+//Calls the ShowInfo and CalculateRisk function
 void Questions(){
     string name;
     int age;
@@ -207,6 +213,7 @@ void Questions(){
     activePerson.CalculateRisk();
 }
 
+//Uses the libcurl library to extract and print current COVID statistics
 void Api(){
     string choice;
     cout << "COVID-19 DATABASE" << endl;
@@ -215,6 +222,7 @@ void Api(){
         cout << "Select 2 to see US data" << endl;
         cout << "Select 3 to quit" << endl;
         cin >> choice;
+        //Retrieves global data
         if(choice == "1"){
             CURL *curl;
             CURLcode res;
@@ -230,6 +238,7 @@ void Api(){
             }
             curl_easy_cleanup(curl);
         }
+        //Retrieves US data
         else if(choice == "2"){
             CURL *curl;
             CURLcode res;
@@ -250,7 +259,7 @@ void Api(){
 
 int main(int argc, const char * argv[]) {
     string choice1;
-    
+    //Prints out user menu
     cout << "Welcome to the COVID-19 Program" << endl;
     while(choice1 != "3"){
         cout << "Select 1 to check your risk for COVID-19" << endl;
