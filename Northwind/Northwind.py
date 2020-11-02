@@ -128,7 +128,7 @@ def runQuery(conn, sql):
 # Outputs an error if needed. Closes the connection at the end of the program
 def main():
     conn = None
-    pathToDB = "/Users/jameson/Desktop/Beep Boop/Database_Design/NorthwindLimited.sqlite"
+    pathToDB = "full path to downloaded database file"
     try:
         conn = connect(pathToDB)
         conn.row_factory = Row
