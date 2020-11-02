@@ -8,7 +8,7 @@ using namespace std;
 
 int main(int argc, const char * argv[]) {
     //create a map from a file
-    Map map("/Users/jameson/Downloads/3x3map.txt");
+    Map map("full path to downloaded map file");
     
     //create a tracker capable of traversing through a map
     Tracker tracker;
