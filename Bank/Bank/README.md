@@ -1,5 +1,5 @@
 # Banking Program
-This banking programconsists of 3 main parts. A Customer class which contains all of the customers information, account classes which 
+This banking program consists of 3 main parts. A Customer class which contains all of the customers information, account classes which 
 hold the banking info, and main which runs the menu’s needed to manipulate the customer’s accounts. 
 
 Account is an abstract base class. It has 3 data
